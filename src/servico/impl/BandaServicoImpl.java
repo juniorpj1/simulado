@@ -1,5 +1,6 @@
 package servico.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import dao.BandaDao;
@@ -38,6 +39,12 @@ private BandaDao dao;
 	@Override
 	public List<Banda> buscarTodos() {
 		return dao.buscarTodos();
+	}
+
+	@Override
+	public List<Banda> bandasPorFaixaDePreco(BigDecimal minimo, BigDecimal maximo) {
+		
+		return dao.bandasPorFaixaDePreco(minimo,maximo);
 	}
 
 }

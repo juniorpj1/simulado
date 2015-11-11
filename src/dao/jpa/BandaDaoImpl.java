@@ -1,5 +1,6 @@
 package dao.jpa;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -42,6 +43,16 @@ public class BandaDaoImpl implements BandaDao {
 		String jpql = "SELECT x FROM Banda x";
 		Query query = em.createQuery(jpql);
 		return query.getResultList();
+	}
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Banda> bandasPorFaixaDePreco(BigDecimal minimo, BigDecimal maximo) {
+		String jpql = "SELECT u FROM Banda u WHERE u.preco BETWEEN :p1 AND :p2";
+		Query query = em.createQuery(jpql);
+		query.setParameter("p1", minimo);
+		query.setParameter("p2", maximo);
+		return query.getResultList();
+		
 	}
 
 }

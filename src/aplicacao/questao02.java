@@ -15,8 +15,10 @@ public class questao02 {
 	public static void main(String[] args) {
 
 		Scanner sc = new Scanner(System.in);
-
 		int op = 0;
+		EspetaculoServico es;
+		BandaServico bs;
+		ParticipacaoServico ps;
 
 		do {
 			System.out.println("\n01 - Cadastrar um novo espetáculo e as participações dele");
@@ -30,20 +32,20 @@ public class questao02 {
 				System.out.println("Digite o nome do espetaculo a ser cadastrado: ");
 				String nome = sc.nextLine();
 				Espetaculo esp = new Espetaculo(null, nome);
-				EspetaculoServico es = ServicoFactory.criarEspetucaloServico();
+				es = ServicoFactory.criarEspetucaloServico();
 				es.inserirAtualizar(esp);
 
 				System.out.println("\nQuantas participacoes este espetaculo vai ter? ");
 				int N = Integer.parseInt(sc.nextLine());
 
-				BandaServico bs = ServicoFactory.criarBandaServico();
+				bs = ServicoFactory.criarBandaServico();
 				List<Banda> listaBandas = bs.buscarTodos();
 				System.out.println("\nBandas existentes: ");
 				for (Banda x : listaBandas) {
 					System.out.println(x);
 				}
 
-				ParticipacaoServico ps = ServicoFactory.criarParticipacaoServico();
+				ps = ServicoFactory.criarParticipacaoServico();
 
 				for (int i = 1; i <= N; i++) {
 					System.out.println("Digite o código da " + i + "a. banda do espetaculo: ");
@@ -56,6 +58,22 @@ public class questao02 {
 				break;
 			case 2:
 
+				System.out.println("Digite o codigo do espetaculo a ser buscado:");
+				int codEsp = Integer.parseInt(sc.nextLine());
+				es = ServicoFactory.criarEspetucaloServico();
+				Espetaculo espetaculo = es.buscar(codEsp);
+				
+				if(espetaculo == null){
+					System.out.println("Código Inexistente!");
+				}else{
+					System.out.println("Nome: " + espetaculo.getNome());
+					System.out.println("Preço total: R$ " + espetaculo.precoTotal());
+					System.out.println("Participacoes: ");
+					for(Participacao x : espetaculo.getParticipacoes()){
+						System.out.println(x.getOrdem()+": " + x.getBanda().getNome());
+					}
+				}
+				
 				break;
 
 			case 3:
