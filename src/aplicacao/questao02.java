@@ -14,6 +14,7 @@ import servico.ServicoFactory;
 public class questao02 {
 	public static void main(String[] args) {
 
+		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
 		int op = 0;
 		EspetaculoServico es;
